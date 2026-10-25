@@ -38,7 +38,7 @@
 
 ## データ
 
-- 生ファイルは `data/raw/`。Git には入れない。
+- 生ファイルは `data/raw/`。Git には入れない。取り直しと州の地図の作り直しは [REBUILD.md](REBUILD.md)。
 - ゲームが読むのは `data/dist/` の地方ごとの json と webp。西ジャワは `jawabarat`、中央ジャワは `jawatengah`、東ジャワは `jawatimur`、ランプンは `lampung`、南スマトラは `sumsel`、バンカ・ブリトゥンは `babel`、ベンクルは `bengkulu`、西カリマンタンは `kalbar`、中部カリマンタンは `kalteng`、ジャンビは `jambi`、リアウ諸島は `kepri`、西スマトラは `sumbar`、リアウは `riau`、バリは `bali`、南カリマンタンは `kalsel`、西ヌサトゥンガラは `ntb`、北スマトラは `sumut`、東カリマンタンは `kaltim`、南スラウェシは `sulsel`、北カリマンタンは `kaltara`、西スラウェシは `sulbar`、アチェは `aceh`、東ヌサトゥンガラは `ntt`、中部スラウェシは `sulteng`、南東スラウェシは `sultra`、ゴロンタロは `gorontalo`、北スラウェシは `sulut`、北マルクは `malut`、マルクは `maluku`、バンテンは `banten`、ジャカルタは `jakarta`、ジョグジャカルタは `yogyakarta`。
 - 画面のフッターに、geoBoundaries（CC BY 4.0）、BPS / WFP / OCHA ROAP（CC BY 3.0 IGO、2020年）、簡略化したこと、SRTM courtesy of the U.S. Geological Survey を書く。
 
