@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3f0e6" />
+    <title>カブパテン王</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar-title">カブパテン王</div>
+      <button id="helpBtn" type="button">遊び方</button>
+    </header>
+    <main>
+      <section class="map-shell">
+        <canvas id="map" aria-label="ジャワ島の色別標高図。陸をドラッグすると県境を描けます。"></canvas>
+        <div class="map-top">
+          <label class="region">
+            <span>出題する地方を選ぶ</span>
+            <select id="region">
+              <option value="jawa">ジャワ島から出題</option>
+              <option value="sumatera">スマトラ島から出題</option>
+              <option value="kalimantan">カリマンタンから出題</option>
+              <option value="sulawesi">スラウェシ島から出題</option>
+              <option value="nusa">ヌサから出題</option>
+            </select>
+          </label>
+          <div class="round">
+            <span id="roundState">スタートでお題を抽選</span>
+            <strong id="roundName"></strong>
+            <b id="timer" role="timer">30秒</b>
+          </div>
+        </div>
+        <p id="hint" class="hint">海岸は描かなくてよい · 海の上の線は点にならない · ホイールで拡大</p>
+        <div class="zoom">
+          <button id="zoomIn" type="button" aria-label="拡大">+</button>
+          <button id="zoomOut" type="button" aria-label="縮小">−</button>
+          <button id="fitBtn" type="button" aria-label="全体表示">全体</button>
+        </div>
+        <div class="legend-height"><span>平野</span><i></i><span>高山</span></div>
+        <p class="credit">
+          境界：<a href="https://www.geoboundaries.org/">geoBoundaries</a>（<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>）。元データは
+          <a href="https://data.humdata.org/dataset/indonesia-administrative-boundary-polygons-lines-and-places-levels-0-4b">BPS / World Food Programme / OCHA ROAP</a>
+          （<a href="https://creativecommons.org/licenses/by/3.0/igo/">CC BY 3.0 IGO</a>、2020年）。形は間引いてある。<br />
+          地形：SRTM（パブリックドメイン）。<a href="https://registry.opendata.aws/terrain-tiles/">Terrain Tiles</a> の標高から色分けと陰影を付けた。SRTM data courtesy of the U.S. Geological Survey.
+        </p>
+        <div id="loading" class="loading"><b>地図を読み込んでいます</b></div>
+      </section>
+      <aside>
+        <button id="scoreBtn" class="primary" type="button" disabled>地図を読み込み中…</button>
+        <div class="stats">
+          <div><span>描いた線</span><strong id="strokeCount">0<small>本</small></strong></div>
+          <div><span>描いた距離</span><strong id="drawDistance">0<small>km</small></strong></div>
+          <div><span>制限時間</span><strong>30<small>秒</small></strong></div>
+        </div>
+        <p class="best">自己ベスト <b id="bestScore">—</b></p>
+        <div class="tools" role="group" aria-label="描画">
+          <button id="penBtn" type="button" class="tool active" aria-pressed="true">描く</button>
+          <button id="panBtn" type="button" class="tool" aria-pressed="false">移動</button>
+          <button id="eraseBtn" type="button" class="tool" aria-pressed="false">消しゴム</button>
+          <button id="undoBtn" type="button" class="tool" disabled>戻す</button>
+          <button id="clearBtn" type="button" class="tool" disabled>全消去</button>
+        </div>
+        <section id="result" class="result" hidden>
+          <p id="resultTitle" class="result-title"></p>
+          <div class="rank" id="rankBadge">
+            <strong id="rankLetter"><span class="rank-word">ランク</span><span id="rankSymbol">A</span></strong>
+            <b id="rankLabel"></b>
+            <span><strong id="points">0</strong> / 100,000点</span>
+          </div>
+          <p id="resultMessage" class="result-message"></p>
+          <div class="key">
+            <span><i class="swatch mine"></i>描いた線</span>
+            <span><i class="swatch answer"></i>正解の県境</span>
+          </div>
+          <div class="result-actions">
+            <button id="shareBtn" class="primary" type="button">結果をコピー</button>
+            <button id="againBtn" class="secondary" type="button">もう一問</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+    <p id="toast" class="toast" hidden></p>
+    <dialog id="helpDialog">
+      <h2>30秒で県境をなぞる</h2>
+      <p>島を選び、出た県の陸の境目を30秒で描く。</p>
+      <ol>
+        <li><b>陸から描く</b><span>海の上でドラッグすると、線ではなく地図が動く。</span></li>
+        <li><b>30秒で提出</b><span>拡大はホイールか、2本指。</span></li>
+        <li><b>結果をコピー</b><span>点数とランクをクリップボードに置く。</span></li>
+      </ol>
+      <p>海岸と離島は正解に入っていない。海にかかった線は採点から外す。</p>
+      <p>正解の線に近いほど点が入る。20kmより遠いと点にならない。描き残しと、県境から外れた線は点を下げる。</p>
+      <button id="closeHelp" class="primary" type="button">閉じる</button>
+    </dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

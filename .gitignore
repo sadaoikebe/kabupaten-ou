@@ -1,0 +1,14 @@
+node_modules/
+/dist/
+.vite/
+*.local
+
+# 境界と DEM の取得物。再生成できる。ゲームに載せる簡略化済み成果物は data/dist/ に置く。
+data/raw/
+data/cache/
+data/work/
+
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
